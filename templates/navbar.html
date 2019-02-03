@@ -12,14 +12,14 @@
 
             {% if user.is_authenticated %}
                 <li class="nav-item active">
-                    <a class="nav-link linksign" href="#">Log Out</a>
+                    <a class="nav-link linksign" href="{% url 'users:log_out' %}">Log Out</a>
                 </li>
             {% else %}
                 <li class="nav-item active">
-                    <a class="nav-link linksign" href="#">Sign Up</a>
+                    <a class="nav-link linksign" href="{% url 'users:sign_up' %}">Sign Up</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link linksign" href="#">Log In</a>
+                    <a class="nav-link linksign" href="{% url 'users:log_in' %}">Log In</a>
                 </li>
             {% endif %}
         </ul>
