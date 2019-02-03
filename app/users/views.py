@@ -7,7 +7,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from .forms import *
 # Create your views here.
-
+# this app allow to sign up, log in 
+# and log out the users
+# it uses class and function based views
+# with the User model provided by django
 class sign_up(CreateView):
     model = User
     template_name = 'users/sign_up.html'
