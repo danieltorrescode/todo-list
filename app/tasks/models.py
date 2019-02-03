@@ -10,7 +10,8 @@ class Task(models.Model):
     )
     name = models.CharField(max_length=50,null=True)
     status = models.IntegerField(default=0, choices=STATUS_ID)
-
+    user = models.ForeignKey(User, null=True,on_delete=models.CASCADE)
+    
     @property
     def get_status(self):
         if self.status is 0:
