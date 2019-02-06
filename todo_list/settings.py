@@ -25,7 +25,7 @@ SECRET_KEY = '*4bl9jb4vx!c^$*ann4vh_^odc$c3g51b*oz7+6l$wte%(e(d0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 INSTALLED_APPS = [
@@ -35,20 +35,23 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app.tasks',
-    'app.users',
+    'rest_framework',
+    'corsheaders',
+    'api.tasks',
+    'api.users',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
+CORS_ORIGIN_ALLOW_ALL = True
 ROOT_URLCONF = 'todo_list.urls'
 
 TEMPLATES = [
@@ -74,6 +77,14 @@ WSGI_APPLICATION = 'todo_list.wsgi.application'
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #     'NAME': 'todo_list',
+    #     'USER': 'postgres',
+    #     'PASSWORD': 'adminpostgresql',
+    #     'HOST': 'localhost',
+    #     'PORT': 5432,
+    # },
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'todo_list',
@@ -132,3 +143,24 @@ STATIC_URL = '/public/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'public'),)
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+
+# Rest Framework Config
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ),
+    # 'DEFAULT_PARSER_CLASSES': (
+    #     'rest_framework.parsers.JSONParser',
+    # ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        # 'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.BasicAuthentication',
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    ),
+}
