@@ -13,7 +13,7 @@ class tasks(CreateModelMixin,ListAPIView):
     serializer_class = TaskSerializer
 
     def list(self, request):
-        queryset = Task.objects.filter(user=request.user).order_by('-id')
+        queryset = Task.objects.filter(user=request.user).order_by('id')
         serializer = TaskSerializer(queryset,many=True)
         return Response(serializer.data)
 

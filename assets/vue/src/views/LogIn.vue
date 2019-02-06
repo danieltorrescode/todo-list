@@ -11,7 +11,7 @@
             v-model="username"
             :rules="userNameRules"
             :counter="10"
-            label="First name"
+            label="Username"
             required
           ></v-text-field>
         </v-flex>
